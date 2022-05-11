@@ -1,0 +1,23 @@
+#!/bin/bash
+HP=3
+DEF=0
+ATK=0
+while [ $(("$HP" != 0)) ]; do
+        echo 'oque vai fazer agora? Suas opções são: 'olhar hp' 'lutar' 'olhar inventario' e 'usar item''
+        read act
+        if [ "$act" = "lutar" ]; then
+                echo 'você..'
+                [ "$ATK" -le 1 ] && echo 'leva 1 de dano!'
+                 HP=$(($HP-1)) || echo 'da 1 de dano!... mas no que?'
+        elif [ "$act" = "olhar hp" ]; then
+                echo "$HP"
+        elif [ "$act" = "olhar inventario" ]; then
+                echo 'você tem: 1 espada. 1 escudo. 1 poção'
+        elif [ "$act" = "usar espada" ]; then
+                ATK=$(($ATK+1))
+        elif [ "$act" = "usar escudo" ]; then
+                DEF=$(($DEF+1))
+        elif [ "$act" = "usar poção" ]; then
+                HP=$(($HP+1))
+        fi
+done 
