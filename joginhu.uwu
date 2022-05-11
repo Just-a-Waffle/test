@@ -1,0 +1,30 @@
+#!/bin/bash
+HP=3
+DEF=0
+ATK=0
+POCAO=1
+ESPADA=1
+ESCUDO=1
+while [ "$HP" != "0" ]; do
+        echo 'oque vai fazer agora? Suas opções são: olhar hp, lutar, olhar inventario, usar item e sair'
+        read act
+        if [ "$act" = "lutar" ]; then
+                echo 'você..'
+                [ "$ATK" -lt "1" ] && echo 'leva 1 de dano' ||  echo "da 1 de dano!... mas no que?"
+                [ "$ATK" -lt "1" ] && HP=$(($HP-1))
+        elif [ "$act" = "olhar hp" ]; then
+                echo "$HP"
+        elif [ "$act" = "olhar inventario" ]; then
+                echo 'você tem: 1 espada. 1 escudo. 1 poção'
+        elif [ "$act" = "usar espada" ]; then
+               [ "$ESPADA" -gt "0" ] && ATK=$(($ATK+1)) ESPADA=$(($ESPADA-1)) || echo 'voce ja equipou sua espada!'
+        elif [ "$act" = "usar escudo" ]; then
+                [ "$ESCUDO" -gt "0" ] && DEF=$(($DEF+1)) ESCUDO=$(($ESCUDO-1)) || echo 'voce ja equipou seu escudo!'
+        elif [ "$act" = "usar pocao" ]; then
+                [ "$POCAO" -gt "0" ] && POCAO=$(($POCAO-1)) HP=$(($HP+1)) || echo 'voce nao tem pocoes!'
+        elif [ "$act" = "sair" ];then
+                echo 'tchau!'
+                break
+        fi
+done
+[ "$HP" = "0" ] && echo 'Voce morreu, game over!'
