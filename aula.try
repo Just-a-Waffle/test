@@ -1,0 +1,29 @@
+#!/bin/bash
+while [ "$z" != "q" ]
+do
+        echo  "digite a para criar um novo arquivo, c para mostrar os arquivos, b para remover um arquivo, d para ir para um diretorio e q para sair " 
+        read -p ':' z
+        if [ "$z" = "a" ];then
+                echo 'qual o nome do novo arquivo?'
+                read n
+                touch $n
+        elif [ "$z" = "c" ];then
+                echo 'você esta no diretorio:' $(pwd)
+                echo 'esses são diretorios!'
+                ls -d */ | grep /
+                echo 'esses são arquivos!'
+                ls -p | grep -v /
+        elif [ "$z" = "b" ];then
+                echo 'qual arquivo a ser removido?'
+                read x
+                rm $x
+        elif [ "$z" = "d" ]; then
+                #echo 'digite a opção'
+                for i in $* 
+                done
+ 
+                #read dir
+                #cd $dir
+                #echo 'você esta em' $(pwd)
+        fi
+done
