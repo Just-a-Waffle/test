@@ -29,8 +29,8 @@ while [ "$HP" != "0" ];do
                         echo 'Voce atacou o ar. Voce.. errou? acertou???'
                 elif [ "$ATK" -lt "1" ];then
                                 echo 'Voce leva 1 de dano!'
-                                else echo 'Voce da 1 de dano!'
                                 [ "$ATK" -lt "1" ] && HP=$(($HP-1))
+                                else echo 'Voce da 1 de dano!'
                 fi
         elif [ "$act" = "olhar hp" ]; then
                 echo "$HP/3"
