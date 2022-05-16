@@ -1,0 +1,126 @@
+#!/bin/bash
+HP=3
+DEF=0
+ATK=0
+POCAO=0
+ESPADA=0
+ESCUDO=0
+room=0
+ESPADAINV=0
+ESCUDOINV=0
+CHEST=1
+SLIMEHP=3
+SLIMEATK=1
+SLIMEDEF=0
+while [ "$HP" != "0" ];do
+        if [ "$room" = "1" ]; then
+                echo 'oque vai fazer agora? Suas opções são: olhar hp, lutar, olhar inventario, olhar sala, explorar, usar item, abrir o bau e sair'
+                read -p ":" act
+                else echo 'oque vai fazer agora? Suas opções são: olhar hp, lutar, olhar inventario, olhar sala, explorar, usar item e sair'
+                read -p ":" act
+                fi
+        if [ "$act" = "olhar sala" ];then
+                if [ "$room" = "0" ];then
+                        echo 'voce se encontra em uma sala vazia.. '
+                elif [ "$room" = "1" ];then
+                        echo 'voce se encontra em uma sala... com um bau!'
+                elif [ "$room" = "2" ];then
+                        echo 'voce se econtra em uma sala.. tem uma gosma aqui!'
+                fi
+        elif [ "$act" = "lutar" ];then
+                if [ "$room" -lt "2" ];then
+                        echo 'Voce atacou o ar. Voce.. errou? acertou???'
+                else while [ "$SLIMEHP" -gt "0" ];do
+                                echo 'voce esta lutando contra uma gosma! O que vai fazer? Atacar, defender, usar item ou fugir?'
+                                read act
+                                if [ "$act" =" atacar" ]; then
+                                        if [ "$DEF" -lt 1 ];then
+                                                if [ "$ATK" -lt 1 ];then
+                                                        echo 'voce leva 1 de dano! E nao da dano nenhum...'
+                                                        [ "$DEF" -lt 1 ] && HP=$(($HP-1))
+                                                else echo 'voce leva 1 de dano e da 1 de dano!'
+
+                                                echo 'Voce leva 1 de dano
+                                echo 'Voce leva 1 de dano!'
+                                [ "$ATK" -lt "1" ] && HP=$(($HP-1))
+                                else echo 'Voce da 1 de dano!'
+                fi
+        elif [ "$act" = "olhar hp" ]; then
+                echo "$HP/3"
+elif [ "$act" = "olhar inventario" ]; then
+                if [ "$ESPADAINV" = "0" ]; then
+                        if [ "$ESCUDOINV" = "1" ];then
+                                [ "$POCAO" = "1" ] && echo 'Voce tem um escudo e uma pocao de cura!' || echo 'Voce tem um escudo!'
+                        elif [ "$POCAO" = "1" ]; then
+                                echo 'Voce tem uma pocao de cura!'
+                        else echo 'Voce nao tem nada!'
+                        fi
+                elif [ "$ESCUDOINV" = "1" ];then
+                        [ "$POCAO" = "1" ] && echo 'voce tem uma espada, um escudo e uma pocao de cura!' || echo 'voce tem uma espada e um escudo!'
+                elif [ "$POCAO" = "1" ];then
+                        echo 'voce tem uma espada e uma pocao de cura!'
+                fi
+        elif [ "$act" = "usar espada" ]; then
+        if [ "$ESPADAINV" = "0" ];then
+                        [ "$ESPADA" = "1" ] && echo 'Voce ja equipou sua espada!' || echo 'Voce nao tem uma espada!'
+                else ATK=$(($ATK+1)) ESPADAINV=$(($ESPADAINV-1)) ESPADA=$(($ESPADA+1))
+                echo 'Espada equipada!'
+                fi
+        elif [ "$act" = "usar escudo" ]; then
+                if [ "$ESCUDOINV" = "0" ];then
+                        [ "$ESCUDO" = "1" ] && echo 'Voce ja usou seu escudo!' || echo 'voce nao tem um escudo!'
+                else DEF=$(($DEF+1)) ESCUDOINV=$(($ESCUDOINV-1)) ESCUDO=$(($ESCUDO+1))
+                echo 'Escudo equipado!'
+                fi
+elif [ "$act" = "usar pocao" ]; then
+                if [ "$POCAO" -gt "0" ];then
+                        POCAO=$(($POCAO-1)) HP=$(($HP+1)) 
+                        echo 'Voce recupera 1 de HP!'
+                else echo 'Voce nao tem pocoes!'
+                fi
+        elif [ "$act" = "sair" ];then
+                echo 'tchau!'
+                break
+        elif [ "$act" = "explorar" ];then
+                if [ "$room" = "2" ]; then
+                        echo 'nao tem mais salas..'
+                else
+                        room=$(($room+1))
+                        echo 'indo para proxima sala..'
+                fi
+        elif [ "$act" = "abrir bau" ];then
+                if [ "$room" = "1" ];then
+                        if [ "$CHEST" = "1" ];then
+                                 echo 'Voce achou uma espada, um escudo e uma pocao de cura!'
+                                ESPADAINV=$(($ESPADAINV+1)) ESCUDOINV=$(($ESCUDOINV+1)) POCAO=$(($POCAO+1)) CHEST=$(($CHEST-1))
+                        else echo 'Voce ja abriu o bau!'
+                        fi
+                else echo 'Nao tem nenhum bau aqui!'
+                fi
+if [ "$POCAO" -gt "0" ];then
+                        POCAO=$(($POCAO-1)) HP=$(($HP+1)) 
+                        echo 'Voce recupera 1 de HP!'
+                else echo 'Voce nao tem pocoes!'
+                fi
+        elif [ "$act" = "sair" ];then
+                echo 'tchau!'
+                break
+        elif [ "$act" = "explorar" ];then
+                if [ "$room" = "2" ]; then
+                        echo 'nao tem mais salas..'
+                else
+                        room=$(($room+1))
+                        echo 'indo para proxima sala..'
+                fi
+        elif [ "$act" = "abrir bau" ];then
+                if [ "$room" = "1" ];then
+                        if [ "$CHEST" = "1" ];then
+                                 echo 'Voce achou uma espada, um escudo e uma pocao de cura!'
+                                ESPADAINV=$(($ESPADAINV+1)) ESCUDOINV=$(($ESCUDOINV+1)) POCAO=$(($POCAO+1)) CHEST=$(($CHEST-1))
+                        else echo 'Voce ja abriu o bau!'
+                        fi
+                else echo 'Nao tem nenhum bau aqui!'
+                fi
+        fi
+done
+[ "$HP" = "0" ] && echo 'Voce morreu, game over!'
